@@ -15,11 +15,11 @@ class TestPomodoro(unittest.TestCase):
                              LONG_REST)
 
   def test_pomodoro_notifies_observers_after_working(self):
-    observer = PomodoroObserver()
+    observer = Dingus()
     self.pomodoro.add_observer(observer)
     self.pomodoro.work()
 
-    self.assertTrue(observer.notified)
+    self.assertTrue(observer.wakeup.calls().once)
 
   def test_pomodoro_makes_me_work(self):
     self.pomodoro.work()
@@ -39,13 +39,3 @@ class TestPomodoro(unittest.TestCase):
 
   def sleep_first_param(self):
     return self.sleeper.sleep.calls()[0][1]
-
-class PomodoroObserver:
-  def __init__(self):
-    self.notified = False
-
-  def wakeup(self):
-    self.notified = True
-
-  def notified(self):
-    return self.notified

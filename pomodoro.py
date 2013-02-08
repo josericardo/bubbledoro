@@ -22,7 +22,7 @@ class Pomodoro:
 
   def long_rest(self):
     self.sleep_and_notify(self.long_rest_in_min)
-  
+ 
   def sleep_and_notify(self, sleep_time):
     self.sleeper.sleep(sleep_time)
 

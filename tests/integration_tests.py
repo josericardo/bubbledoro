@@ -6,9 +6,6 @@ TEST_REPO_PATH = 'tests/bubbledoro_test_repo.json'
 
 class IntegrationTest(unittest.TestCase):
 
-  def setUp(self):
-    pass
-
   def persistence_works_test(self):
     goals = ['Goal 1', 'Goal 2']
     repo = GoalsRepository(TEST_REPO_PATH)
@@ -23,9 +20,6 @@ class IntegrationTest(unittest.TestCase):
 
     self.assertEqual(goals, repo2.goals)
 
-
   def tearDown(self):
     from subprocess import call
     call(["rm", "-rf", TEST_REPO_PATH])
-
-

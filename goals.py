@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 
 class Goal:
 
@@ -12,9 +13,9 @@ class Goal:
     return self.title == other.title
 
 class GoalsRepository:
-  def __init__(self, repo_file='~/.bubbledoro'):
+  def __init__(self, repo_path='bubbledoro.json'):
     self.goals = []
-    self.repo_file = repo_file 
+    self.repo_path = repo_path
 
   def add(self, goal):
     self.goals.append(goal)
@@ -27,16 +28,16 @@ class GoalsRepository:
       if goal.title == old_goal:
         self.goals[i].title = new_goal_title
 
-  def goals(self):
-    return self.goals
-
-  def repo(self):
-    return open(self.repo_file, 'w+b')
-
   def load(self):
-    goals = json.load(self.repo().read())
-    self.repo().close()
+    self.goals = json.loads(self.read_repo_file())
+
+  def read_repo_file(self):
+    f = open(self.repo_path, 'r')
+    data = f.read()
+    f.close()
+    return '[]' if data == '' else data
 
   def persist(self):
-    self.repo().write(json.dumps(self.goals))
-    self.repo().close()
+    f = open(self.repo_path, 'w')
+    f.write(json.dumps(self.goals))
+    f.close()

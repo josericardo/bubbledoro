@@ -1,19 +1,19 @@
-import json
+import pickle
 from pprint import pprint
 
 class Goal:
-
-  def __init__(self, title):
+  def __init__(self, title, dedication=0):
     self.title = title
+    self.dedication = dedication
 
   def set_dedication(self, mins):
-    self.mins = mins
+    self.dedication = mins
 
   def __eq__(self, other):
     return self.title == other.title
 
 class GoalsRepository:
-  def __init__(self, repo_path='bubbledoro.json'):
+  def __init__(self, repo_path='bubbledoro'):
     self.goals = []
     self.repo_path = repo_path
 
@@ -29,7 +29,7 @@ class GoalsRepository:
         self.goals[i].title = new_goal_title
 
   def load(self):
-    self.goals = json.loads(self.read_repo_file())
+    self.goals = pickle.loads(self.read_repo_file())
 
   def read_repo_file(self):
     f = open(self.repo_path, 'r')
@@ -39,5 +39,5 @@ class GoalsRepository:
 
   def persist(self):
     f = open(self.repo_path, 'w')
-    f.write(json.dumps(self.goals))
+    f.write(pickle.dumps(self.goals))
     f.close()

@@ -2,12 +2,12 @@ from goals import *
 from pprint import pprint
 import unittest
 
-TEST_REPO_PATH = 'tests/bubbledoro_test_repo.json'
+TEST_REPO_PATH = 'tests/bubbledoro_test_repo'
 
 class IntegrationTest(unittest.TestCase):
 
   def persistence_works_test(self):
-    goals = ['Goal 1', 'Goal 2']
+    goals = [Goal('Goal 1', 120), Goal('Goal 2')]
     repo = GoalsRepository(TEST_REPO_PATH)
 
     for g in goals:

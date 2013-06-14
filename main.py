@@ -3,6 +3,7 @@
 from pomodoro import Pomodoro
 from sleeper import Sleeper
 from bubbledoro import Bubbledoro
+from commands import getstatusoutput
 
 
 class TerminalWriter:
@@ -15,10 +16,19 @@ class TerminalWriter:
             print 'You should rest for a little longer now...'
 
 
-class Beeper:
+class MPG321Notifier:
     def wakeup(self, event):
-        if event.startswith('after'):
+        sounds = {
+            'before_work': 'lets_play',
+            'before_short_rest': 'available',
+            'before_long_rest': 'chewy'
+        }
+
+        sound = sounds.get(event, '')
+
+        if sound:
             print("\a")
+            getstatusoutput('mpg321 sounds/%s.wav' % sound)
 
 
 class PomodoroWatcher:
@@ -26,7 +36,8 @@ class PomodoroWatcher:
         print("%s has finished" % event)
 
 pomodoro = Pomodoro(Sleeper(), 25, 5, 20)
-pomodoro.add_observer(Beeper())
+
+pomodoro.add_observer(MPG321Notifier())
 pomodoro.add_observer(TerminalWriter())
 
 Bubbledoro(pomodoro).run()

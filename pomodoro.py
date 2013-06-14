@@ -1,30 +1,36 @@
+import sleeper
+
+
 class Pomodoro:
+    def __init__(self, sleeper, work_in_min, short_rest_in_min, long_rest_in_min):
 
-  def __init__(self, sleeper, 
-                     work_in_min, 
-                     short_rest_in_min, 
-                     long_rest_in_min):
+        self.sleeper = sleeper
+        self.work_in_min = work_in_min
+        self.short_rest_in_min = short_rest_in_min
+        self.long_rest_in_min = long_rest_in_min
+        self.observers = []
 
-    self.sleeper = sleeper
-    self.work_in_min = work_in_min
-    self.short_rest_in_min = short_rest_in_min
-    self.long_rest_in_min = long_rest_in_min
-    self.observers = []
+    @staticmethod
+    def default():
+        return Pomodoro(sleeper.Sleeper(), 25, 5, 30)
 
-  def add_observer(self, observer):
-    self.observers.append(observer)
+    def add_observer(self, observer):
+        self.observers.append(observer)
 
-  def work(self):
-    self.sleep_and_notify(self.work_in_min)
+    def work(self):
+        self.sleep_and_notify(self.work_in_min, 'work')
 
-  def short_rest(self):
-    self.sleep_and_notify(self.short_rest_in_min)
+    def short_rest(self):
+        self.sleep_and_notify(self.short_rest_in_min, 'short_rest')
 
-  def long_rest(self):
-    self.sleep_and_notify(self.long_rest_in_min)
- 
-  def sleep_and_notify(self, sleep_time):
-    self.sleeper.sleep(sleep_time)
+    def long_rest(self):
+        self.sleep_and_notify(self.long_rest_in_min, 'long_rest')
 
-    for o in self.observers:
-      o.wakeup()
+    def sleep_and_notify(self, sleep_time, event):
+        self.notify('before_' + event)
+        self.sleeper.sleep(sleep_time)
+        self.notify('after_' + event)
+
+    def notify(self, event):
+        for o in self.observers:
+            o.wakeup(event)

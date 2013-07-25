@@ -28,3 +28,11 @@ bubbledoro expect dedication for [goal]
 bubbledoro update dedication for [goal]
 
 bubbledoro start session for [goal]
+
+@TODO
+
+- Read input from the user for:
+  - I was interrupted, restart pomodoro
+  - Interruptions: work related, non-work related
+  - I worked more than I should, restart rest
+  - Last pomodoro was a failure, cancel

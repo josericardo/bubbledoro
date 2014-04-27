@@ -2,7 +2,7 @@ from bubbledoro.goals import *
 from pprint import pprint
 import unittest
 
-TEST_REPO_PATH = 'tests/bubbledoro_test_repo'
+TEST_REPO_PATH = 'bubbledoro/tests/bubbledoro_test_repo'
 
 class IntegrationTest(unittest.TestCase):
 

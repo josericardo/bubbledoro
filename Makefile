@@ -11,7 +11,7 @@ uninstall:
 
 install:
 	python setup.py sdist
-	pip install dist/bubbledoro-0.1.0.tar.gz
+	pip install dist/bubbledoro-0.0.1.tar.gz
 	rm -rf MANIFEST dist
 
 up: source_up lup

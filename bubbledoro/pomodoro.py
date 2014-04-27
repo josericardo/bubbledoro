@@ -28,8 +28,12 @@ class Pomodoro:
 
     def sleep_and_notify(self, sleep_time, event):
         self.notify('before_' + event)
-        self.sleeper.sleep(sleep_time)
-        self.notify('after_' + event)
+        user_input = self.sleeper.sleep(sleep_time)
+
+        if not user_input:
+            self.notify('after_' + event)
+        elif user_input.lower() == 'i':
+            self.sleep_and_notify(sleep_time, event)
 
     def notify(self, event):
         for o in self.observers:

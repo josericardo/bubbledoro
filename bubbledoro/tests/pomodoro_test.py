@@ -9,6 +9,23 @@ LONG_REST = 30
 def new_pomodoro(sleeper):
     return Pomodoro(sleeper, WORK_INTERVAL, SHORT_REST, LONG_REST)
 
+
+class FakeSleeper:
+    def __init__(self): self.calls = 0
+
+    def sleep(self, time):
+        self.calls += 1
+        return '' if self.calls > 1 else 'i'
+
+
+class FakeObserver:
+
+    def __init__(self):
+        self.received_events = []
+
+    def wakeup(self, event):
+        self.received_events.append(event)
+
 class TestPomodoro(unittest.TestCase):
   def setUp(self):
     self.sleeper = Dingus()
@@ -25,6 +42,16 @@ class TestPomodoro(unittest.TestCase):
     pomodoro = new_pomodoro(self.sleeper)
     pomodoro.work()
     self.slept_for(WORK_INTERVAL)
+
+  def test_pomodoro_can_be_restarted(self):
+    observer = FakeObserver()
+    pomodoro = new_pomodoro(FakeSleeper())
+    pomodoro.add_observer(observer)
+    pomodoro.work()
+
+    before_work_events = [e for e in observer.received_events if e == 'before_work']
+    msg = "Two before_work events were expected, because the pomodoro was interrupted"
+    self.assertEqual(2, len(before_work_events), msg)
 
   def test_pomodoro_makes_me_rest_a_little(self):
     pomodoro = new_pomodoro(self.sleeper)

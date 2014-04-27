@@ -9,17 +9,25 @@ from bubbledoro.sleeper import Sleeper
 from bubbledoro.bubbledoro import Bubbledoro
 from commands import getstatusoutput
 import datetime
+from collections import defaultdict
 
 
 class TerminalWriter:
-    def wakeup(self, event):
-        msg_for = {
+    def __init__(self):
+        self.msg_for = defaultdict(str)
+        self.msg_for.update({
             'before_work': 'You should be working',
             'before_short_rest': 'You should rest a little',
             'before_long_rest': 'You should rest for a little longer now'
-        }
+        })
 
-        print("%s. You can press [q, i] anytime." % msg_for[event])
+    def wakeup(self, event):
+        msg = self.msg_for[event]
+
+        if msg:
+            print("%s. " % msg),
+
+        print("You can press [q, i] anytime.")
 
 
 class MPG321Notifier:

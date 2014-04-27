@@ -33,8 +33,10 @@ class Pomodoro:
         if not user_input:
             self.notify('after_' + event)
         elif user_input == 'q':
+            self.notify('quit')
             raise UserRequestedTermination()
         elif user_input == 'i':
+            self.notify('interrupted_' + event)
             self.sleep_and_notify(sleep_time, event)
 
     def notify(self, event):

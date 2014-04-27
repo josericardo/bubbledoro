@@ -4,6 +4,7 @@ from pomodoro import Pomodoro
 from sleeper import Sleeper
 from bubbledoro import Bubbledoro
 from commands import getstatusoutput
+import datetime
 
 
 class TerminalWriter:
@@ -29,6 +30,7 @@ class MPG321Notifier:
         if sound:
             print("\a")
             getstatusoutput('mpg321 sounds/%s.wav' % sound)
+            print datetime.datetime.now()
 
 
 class PomodoroWatcher:

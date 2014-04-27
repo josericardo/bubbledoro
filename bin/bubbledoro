@@ -13,12 +13,13 @@ import datetime
 
 class TerminalWriter:
     def wakeup(self, event):
-        if event == 'before_work':
-            print 'You should be working...'
-        elif event == 'before_short_rest':
-            print 'You should rest a little...'
-        elif event == 'before_long_rest':
-            print 'You should rest for a little longer now...'
+        msg_for = {
+            'before_work': 'You should be working',
+            'before_short_rest': 'You should rest a little',
+            'before_long_rest': 'You should rest for a little longer now'
+        }
+
+        print("%s. You can press [q, i] anytime." % msg_for[event])
 
 
 class MPG321Notifier:

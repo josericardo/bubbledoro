@@ -11,11 +11,13 @@ def new_pomodoro(sleeper):
 
 
 class FakeSleeper:
-    def __init__(self): self.calls = 0
+    def __init__(self, first_user_input=''):
+        self.calls = 0
+        self.first_user_input = first_user_input
 
     def sleep(self, time):
         self.calls += 1
-        return '' if self.calls > 1 else 'i'
+        return '' if self.calls > 1 else self.first_user_input
 
 
 class FakeObserver:
@@ -45,7 +47,7 @@ class TestPomodoro(unittest.TestCase):
 
   def test_pomodoro_can_be_restarted(self):
     observer = FakeObserver()
-    pomodoro = new_pomodoro(FakeSleeper())
+    pomodoro = new_pomodoro(FakeSleeper(first_user_input='i'))
     pomodoro.add_observer(observer)
     pomodoro.work()
 

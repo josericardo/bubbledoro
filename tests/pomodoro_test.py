@@ -1,5 +1,5 @@
 import unittest
-from pomodoro import Pomodoro
+from bubbledoro.pomodoro import Pomodoro
 from dingus import Dingus
 
 WORK_INTERVAL = 25
@@ -9,9 +9,9 @@ LONG_REST = 30
 class TestPomodoro(unittest.TestCase):
   def setUp(self):
     self.sleeper = Dingus()
-    self.pomodoro = Pomodoro(self.sleeper, 
-                             WORK_INTERVAL, 
-                             SHORT_REST, 
+    self.pomodoro = Pomodoro(self.sleeper,
+                             WORK_INTERVAL,
+                             SHORT_REST,
                              LONG_REST)
 
   def test_pomodoro_notifies_observers_after_working(self):

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from pomodoro import Pomodoro
-from sleeper import Sleeper
-from bubbledoro import Bubbledoro
+from bubbledoro.pomodoro import Pomodoro
+from bubbledoro.sleeper import Sleeper
+from bubbledoro.bubbledoro import Bubbledoro
 from commands import getstatusoutput
 import datetime
 

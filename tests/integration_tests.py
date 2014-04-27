@@ -1,4 +1,4 @@
-from goals import * 
+from bubbledoro.goals import *
 from pprint import pprint
 import unittest
 
@@ -12,7 +12,7 @@ class IntegrationTest(unittest.TestCase):
 
     for g in goals:
       repo.add(g)
-    
+
     repo.persist()
 
     repo2 = GoalsRepository(TEST_REPO_PATH)

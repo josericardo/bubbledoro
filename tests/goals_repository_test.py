@@ -1,5 +1,5 @@
 import unittest
-from goals import *
+from bubbledoro.goals import *
 
 class GoalsRepositoryTest(unittest.TestCase):
 

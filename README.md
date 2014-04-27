@@ -32,7 +32,10 @@ bubbledoro start session for [goal]
 @TODO
 
 - Read input from the user for:
+  - I worked more than I should, start rest right now
   - I was interrupted, restart pomodoro
   - Interruptions: work related, non-work related
   - I worked more than I should, restart rest
   - Last pomodoro was a failure, cancel
+
+- Give more sound options, agressive and gentle

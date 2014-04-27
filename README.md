@@ -17,8 +17,10 @@ It will generate a package and install via PIP:
 
 $ make install
 
-Commands 
-========
+Planned Interface
+=================
+
+*Not implemented*
 
 bubbledoro add [goal]
 

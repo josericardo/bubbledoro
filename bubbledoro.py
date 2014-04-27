@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pomodoro import Pomodoro
 from sleeper import Sleeper
 

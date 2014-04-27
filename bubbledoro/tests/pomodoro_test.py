@@ -1,5 +1,5 @@
 import unittest
-from bubbledoro.pomodoro import Pomodoro
+from bubbledoro.pomodoro import Pomodoro, UserRequestedTermination
 from dingus import Dingus
 
 WORK_INTERVAL = 25
@@ -54,6 +54,10 @@ class TestPomodoro(unittest.TestCase):
     before_work_events = [e for e in observer.received_events if e == 'before_work']
     msg = "Two before_work events were expected, because the pomodoro was interrupted"
     self.assertEqual(2, len(before_work_events), msg)
+
+  def test_pomodoro_can_be_terminated(self):
+    pomodoro = new_pomodoro(FakeSleeper(first_user_input='q'))
+    self.assertRaises(UserRequestedTermination, pomodoro.work)
 
   def test_pomodoro_makes_me_rest_a_little(self):
     pomodoro = new_pomodoro(self.sleeper)

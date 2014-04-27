@@ -28,13 +28,18 @@ class Pomodoro:
 
     def sleep_and_notify(self, sleep_time, event):
         self.notify('before_' + event)
-        user_input = self.sleeper.sleep(sleep_time).lower()
+        user_input = self.sleeper.sleep(sleep_time).lower().strip()
 
         if not user_input:
             self.notify('after_' + event)
+        elif user_input == 'q':
+            raise UserRequestedTermination()
         elif user_input == 'i':
             self.sleep_and_notify(sleep_time, event)
 
     def notify(self, event):
         for o in self.observers:
             o.wakeup(event)
+
+class UserRequestedTermination(RuntimeError):
+    pass

@@ -6,20 +6,27 @@ Inspired by BubbleTimer, using Pomodoros.
 Bubledoro is a terminal application which allows you to set some goals, defining how much time you plan to spend on them and then track your progress as you spend Pomodoros working on them.
 
 Requirements
-========
+============
 
 Only mpg321.
+
+Installing
+==========
+
+It will generate a package and install via PIP:
+
+$ make install
 
 Commands 
 ========
 
-bubbledoro add [goal] 
+bubbledoro add [goal]
 
 bubbledoro rename [goal]
 
 bubbledoro delete [goal]
 
-bubbledoro show 
+bubbledoro show
 
   Shows all goals
 

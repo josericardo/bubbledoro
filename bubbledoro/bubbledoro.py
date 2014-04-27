@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from pomodoro import Pomodoro
+from pomodoro import Pomodoro, UserRequestedTermination
 from sleeper import Sleeper
 
 
@@ -12,8 +12,12 @@ class Bubbledoro:
         running = 'y'
 
         while running == 'y':
-            self.run_one_cycle()
-            running = self.should_keep_running()
+            try:
+                self.run_one_cycle()
+                running = self.should_keep_running()
+            except UserRequestedTermination as urt:
+                print("\nTerminating.")
+                running = 'n'
 
     def run_one_cycle(self):
         i = 0

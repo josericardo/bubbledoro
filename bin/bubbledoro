@@ -4,6 +4,7 @@ import sys
 import os
 sys.path.insert(0, os.path.realpath('.'))
 
+import pkg_resources
 from bubbledoro.pomodoro import Pomodoro
 from bubbledoro.sleeper import Sleeper
 from bubbledoro.bubbledoro import Bubbledoro
@@ -40,9 +41,11 @@ class MPG321Notifier:
 
         sound = sounds.get(event, '')
 
+
         if sound:
             print("\a")
-            getstatusoutput('mpg321 sounds/%s.wav' % sound)
+            path = pkg_resources.resource_filename('bubbledoro', '%s.wav' % sound)
+            getstatusoutput('mpg321 %s' % path)
             print datetime.datetime.now()
 
 

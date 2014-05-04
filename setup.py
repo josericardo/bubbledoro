@@ -1,8 +1,14 @@
 from distutils.core import setup
 from distutils.command.install import INSTALL_SCHEMES
 
+# this is the way I've found to install the sound files
+# in the package folder
 for scheme in INSTALL_SCHEMES.values():
     scheme['data'] = scheme['purelib']
+
+sound_files = [ 'sounds/lets_play.wav',
+                'sounds/chewy.wav',
+                'sounds/available.wav']
 
 setup(
     name='bubbledoro',
@@ -15,7 +21,7 @@ setup(
     license='LICENSE.txt',
     description='A command line pomodoro counter and goals tracker.',
     long_description=open('README.md').read(),
-    data_files=[('bubbledoro', ['sounds/lets_play.wav', 'sounds/chewy.wav', 'sounds/available.wav'])],
+    data_files=[('bubbledoro', sound_files)],
     include_package_data=True,
     install_requires=[
     ],
